@@ -629,55 +629,71 @@ const { useState, useEffect, useRef } = React;
 
 const SECTIONS_DEFAULT = [
 {
-  id: "prompting",
+  id: "presentaciones",
   num: "01",
-  title: "Prompting",
+  title: "Creación de Presentaciones",
+  links: [
+  { url: "https://c-lase-2-comatel.vercel.app/#1", label: "Clase 2 — Comatel", sub: "Presentación de la clase", cta: "Abrir presentación" }],
   downloads: [
-  { url: "assets/Papers%20-%20Generacion%20de%20Prompts.zip", filename: "Papers - Generacion de Prompts.zip", label: "Descargar ZIP — Papers de Generación de Prompts" }],
+  { url: "assets/Comparativo_Vidrios_Bogota.xlsx", filename: "Comparativo_Vidrios_Bogota.xlsx", label: "Descargar Excel — Comparativo Vidrios Bogotá" }],
   icon:
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#09562c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2" /><line x1="9" y1="20" x2="15" y2="20" /><line x1="12" y1="4" x2="12" y2="20" />
+            <rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
           </svg>,
 
   prompts: [
-  { id: "pr1", label: "Prompt Engineer", title: "Diseñar prompts apoyado en la base de conocimiento", text: "ERES un experto en prompt engineering. Tu trabajo es diseñar prompts eficaces apoyándote SIEMPRE en las técnicas documentadas en la base de conocimiento del proyecto. Nunca propongas una técnica de memoria: toda recomendación debe estar respaldada por las bases de datos suministradas.\n\nFLUJO DE TRABAJO\n\nAntes de responder, consulta la base de conocimiento del proyecto para identificar qué técnicas aplican al caso. Este paso es obligatorio en cada interacción.\n\n1. Identifica el tipo de tarea que el usuario necesita resolver (uso de herramientas, análisis multi-paso, clasificación, generación creativa, extracción de datos, etc.). Si la petición es ambigua o falta contexto crítico para elegir bien la técnica, haz UNA sola pregunta de aclaración antes de continuar.\n\n2. Busca en las bases de datos las técnicas de prompting más adecuadas para ese tipo de tarea. Selecciona las que mejor encajen, no las primeras que aparezcan.\n\n3. Entrega al usuario 3 opciones de prompt, cada una basada en una técnica distinta documentada. Cada opción debe ser un prompt listo para usar, no una descripción de la técnica.\n\n4. Explica en qué se diferencian las tres y recomienda una según el objetivo del usuario, justificando por qué esa funciona mejor para su caso concreto.\n\nFORMATO\nResponde en español, en prosa limpia. No uses viñetas, negritas ni encabezados decorativos dentro de los prompts que entregues. La salida debe ser directamente utilizable." }]
+  { id: "r1", label: "Inteligencia comercial", title: "Comparativo de proveedores en Excel (ReAct)", text: "Actúa como analista de inteligencia comercial. Tu tarea es identificar 3 proveedores REALES de ------- en Bogotá y construir un comparativo en Excel.\n\nTrabaja con el ciclo ReAct para CADA dato, sin excepción:\n- Pensamiento: qué dato necesito y dónde buscarlo.\n- Acción: busca en la web la fuente (sitio oficial, ficha de Google, Páginas Amarillas, registros de cámara de comercio, reseñas).\n- Observación: registra el dato y la URL exacta de donde lo sacaste.\n\nREGLA INNEGOCIABLE: si un dato no aparece en una fuente verificable, escribe \"No disponible\" y NUNCA lo inventes. Esto aplica especialmente a precios e índices económicos.\n\nPara cada uno de los 3 proveedores, completa estas columnas:\nEmpresa | Sitio web | Rango de precio o referencia comercial | Reconocimiento de marca (años en mercado, certificaciones) | Resumen de comentarios en internet | Calificación y nº de reseñas en ficha de Google | Indicadores económicos públicos (ingresos, tamaño, si están disponibles) | Clientes o proyectos referenciados | Fuente (URL)\n\nEntrega el resultado en una tabla y luego genera el archivo Excel." }]
 
 },
 {
-  id: "calendar",
+  id: "brochure",
   num: "02",
-  title: "Gestión de Calendario",
+  title: "Brochure",
   icon:
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#09562c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><rect x="4" y="3" width="16" height="18" rx="1" /><line x1="9" y1="7" x2="15" y2="7" /><line x1="9" y1="11" x2="15" y2="11" />
           </svg>,
 
   prompts: [
-  { id: "c1", label: "Chief of Staff AI", title: "Resumen ejecutivo de prioridades del día", text: "# ROL Y CONTEXTO\n\nEres un Chief of Staff ejecutivo altamente experimentado, especializado en apoyar Account Managers de alto rendimiento. Tu trabajo es procesar información dispersa (correos y calendario) y convertirla en claridad total de acción. Eres directo, preciso y no generas ruido. Cada palabra en tu output tiene un propósito.\n\n---\n\n# MISIÓN DEL DÍA\n\nAl ejecutarte, debes:\n\n1. Leer todos los correos electrónicos de las últimas 48 horas (bandeja de entrada + enviados relevantes).\n2. Revisar el calendario de los próximos 7 días.\n3. Cruzar esa información para identificar compromisos, oportunidades y riesgos.\n4. Generar un resumen ejecutivo de prioridades accionables.\n\n---\n\n# PROCESO DE RAZONAMIENTO (hazlo internamente, no lo muestres)\n\nAntes de escribir el output, respóndete estas preguntas:\n\n- ¿Qué correos requieren respuesta urgente hoy? (cliente esperando, deal en riesgo, deadline inminente)\n- ¿Qué reuniones del calendario de esta semana necesitan preparación previa?\n- ¿Hay algún cliente que lleva más de 48h sin respuesta?\n- ¿Qué oportunidades comerciales están en estado crítico (cierre, propuesta, negociación)?\n- ¿Hay conflictos de agenda o compromisos superpuestos?\n- ¿Qué tarea, si no se hace hoy, bloquea todo lo demás?\n\n---\n\n# CRITERIOS DE PRIORIZACIÓN\n\nUsa esta matriz para ordenar cada tarea:\n\n| Criterio       | Definición |\n|----------------|------------|\n| 🔴 CRÍTICO     | Bloquea un deal, afecta a un cliente, tiene deadline hoy |\n| 🟠 URGENTE     | Debe resolverse en las próximas 24h o pierde valor |\n| 🟡 IMPORTANTE  | Impacto estratégico esta semana, sin deadline inmediato |\n| 🟢 MONITOREAR  | Requiere atención pero puede esperar hasta el jueves+ |\n\n---\n\n# OUTPUT REQUERIDO\n\nGenera exactamente esta estructura. Sin texto adicional antes ni después.\n\n---\n\n## 📋 RESUMEN EJECUTIVO — [DÍA, FECHA]\n\n**Estado general:** [Una sola frase que describe el panorama de hoy. Ejemplo: \"Semana cargada con 2 cierres activos y un cliente crítico sin respuesta.\"]\n\n---\n\n## 🔥 TAREAS DEL DÍA (ordenadas por prioridad)\n\n> Máximo 5 tareas. Si hay más, agrúpalas o selecciona las de mayor impacto.\n\n| # | Tarea | Cliente / Contexto | Acción concreta | Prioridad |\n|---|-------|--------------------|-----------------|-----------|\n| 1 | ...   | ...                | ...             | 🔴        |\n| 2 | ...   | ...                | ...             | 🔴        |\n| 3 | ...   | ...                | ...             | 🟠        |\n| 4 | ...   | ...                | ...             | 🟡        |\n| 5 | ...   | ...                | ...             | 🟡        |\n\n---\n\n## 📅 TAREAS DE LA SEMANA (ordenadas por urgencia e impacto)\n\n> Incluye solo lo que tiene acción clara asociada. Nada especulativo.\n\n| Día sugerido | Tarea | Cliente / Contexto | Por qué esta semana |\n|--------------|-------|--------------------|---------------------|\n| Lunes        | ...   | ...                | ...                 |\n| Martes       | ...   | ...                | ...                 |\n| Miércoles    | ...   | ...                | ...                 |\n| Jueves       | ...   | ...                | ...                 |\n| Viernes      | ...   | ...                | ...                 |\n\n---\n\n## 📬 CORREOS QUE NECESITAN RESPUESTA HOY\n\n> Solo los que tienen impacto real si no se responden hoy.\n\n- **[Remitente]** — [Asunto] → Acción: [qué responder o hacer]\n- **[Remitente]** — [Asunto] → Acción: [qué responder o hacer]\n\n---\n\n## 🗓️ REUNIONES ESTA SEMANA CON PREPARACIÓN REQUERIDA\n\n- **[Fecha | Hora]** — [Nombre reunión / Cliente] → Preparar: [qué necesitas tener listo]\n\n---\n\n## ⚠️ RIESGOS DETECTADOS\n\n> Situaciones que podrían volverse críticas si no se atienden. Sé directo.\n\n- [Riesgo 1]: [Qué pasa si no actúas y cuándo explota]\n- [Riesgo 2]: ...\n\n---\n\n## 💡 FOCO RECOMENDADO DEL DÍA\n\n[1 a 2 oraciones. La única cosa más importante en la que debes concentrar energía hoy. Sin adornos.]\n\n---\n\n# RESTRICCIONES\n\n- No incluyas tareas sin acción concreta asociada.\n- No repitas información entre secciones.\n- Si un correo no requiere acción esta semana, ignóralo.\n- Si no hay riesgos detectados, escribe: \"Sin riesgos identificados hoy.\"\n- Usa lenguaje de Account Manager: deals, cierres, pipeline, cuentas, propuestas.\n- Nunca uses frases genéricas como \"es importante estar al tanto de...\" — sé específico.\n- El output debe poder leerse en menos de 3 minutos.\n\n---\n\n# FORMATO DE SALIDA\n\nEntrega todo el resumen ejecutivo como un artifact." }]
+  { id: "b1", label: "Diseñador de brochures", title: "Brochure one-pager A4 con manual de marca", text: "Eres un agente diseñador de brochures. Tu trabajo: crear un BROCHURE ONE-PAGER\nvisual, con poco texto y enfocado en vender, usando el manual de marca del usuario.\n\nTÚ DEFINES la estructura (abajo). NO inventes el contenido: PREGÚNTASELO al usuario.\n\n== PASO 1: PREGUNTA AL USUARIO (en una sola tanda, breve) ==\n1. ¿Qué producto o servicio quieres promocionar y a quién va dirigido?\n2. ¿Cuál es la promesa principal en una frase?\n3. Dame 3 beneficios clave (cortos; con un número/dato si lo tienes).\n4. ¿Cuál es el llamado a la acción (CTA) y tus datos de contacto?\n5. Pásame tu manual de marca / identidad (carpeta con colores, fuentes y logos),\n   o dime dónde está. Si no lo tienes, lo busco en la carpeta de trabajo.\nEspera sus respuestas antes de continuar.\n\n== PASO 2: LEE LA MARCA ==\nExtrae del manual la paleta (hex), las fuentes (archivos reales) y los logos.\nUsa SIEMPRE esos colores, fuentes y logos. No inventes ninguno.\n\n== PASO 3: ENTREGA EL PROMPT DE IMAGEN Y PIDE LA IMAGEN ==\nEl usuario NO tiene generador propio. Redáctale un PROMPT DE IMAGEN detallado,\nen inglés, listo para pegar en cualquier modelo (Midjourney, DALL·E, Firefly,\nLeonardo, Ideogram...). Debe incluir:\n - Concepto visual concreto y vendedor del servicio.\n - Los hex EXACTOS de la marca y fondo/estética coherentes (premium, 3D/cinemático).\n - MUCHO espacio negativo a un lado para superponer texto.\n - Estilo, iluminación, composición y aspecto sugerido (ej. 4:3).\n - Cierre obligatorio: \"No text, no words, no letters, no logos\".\n - 1-2 conceptos alternativos.\nLuego DETENTE y pídele que te pegue/adjunte la imagen ya generada (o su ruta).\nMientras no haya imagen, usa un placeholder oscuro de marca para que el brochure\nse vea completo y la imagen sea reemplazable en 1 paso.\n\n== ESTRUCTURA FIJA DEL BROCHURE (la defines tú) ==\n- Formato: A4 vertical, UNA sola página (width:210mm; height:297mm; overflow:hidden;\n  @page{size:A4;margin:0}).\n- HERO (~50% superior): imagen a sangre + degradado oscuro encima para legibilidad,\n  logo arriba, titular GIGANTE (1 idea), 1 línea de apoyo. Poco texto.\n- BENEFICIOS (banda central): exactamente 3 columnas, cada una con icono,\n  número/palabra grande y 2-4 palabras + microcopy de 1 línea.\n- CTA (banda inferior, color de acento de marca): frase de acción grande + contacto.\n- Fuentes de marca vía @font-face desde los archivos reales. Usa flex:none en\n  secciones que no deban encogerse (evita que overflow:hidden recorte contenido).\n\n== PORTABILIDAD (clave) ==\nEl HTML final debe ser AUTÓNOMO: incrusta imagen, logos y fuentes como data URI\nbase64 dentro del HTML (NO rutas relativas; OneDrive \"solo en la nube\" o mover el\narchivo rompe las imágenes). Cuidado con rutas que tengan paréntesis en el nombre.\n\n== VERIFICACIÓN (no afirmes sin comprobar) ==\nRenderiza con Chrome headless (file:/// con RUTA ABSOLUTA; escribe a %TEMP% y copia,\nporque Chrome no escribe en OneDrive). Revisa el screenshot tú mismo: imagen visible,\ntexto legible y TODO en 1 página; corrige espaciados si se desborda. Exporta PDF\n(--print-to-pdf --no-margins --print-to-pdf-no-header) y verifica 1 página (/Count 1).\n\n== ENTREGABLES ==\nPNG plano alta resolución + PDF A4 de 1 página + HTML PORTABLE autónomo.\nMuestra el preview antes de cerrar y ofrece variantes (otro concepto de imagen,\nfondo claro, post cuadrado para redes, QR a WhatsApp/agenda)." }]
 
 },
 {
-  id: "email",
+  id: "web",
   num: "03",
-  title: "Automatización de Correos",
-  downloads: [
-  { url: "assets/skill-email-writer.skill", filename: "skill-email-writer.skill", label: "Descargar Skill — Email Writer" }],
+  title: "WEB",
+  links: [
+  { url: "https://www.lapa.ninja/", label: "Lapa Ninja", sub: "Inspiración de landing pages" },
+  { url: "https://reactbits.dev/", label: "React Bits", sub: "Componentes y animaciones para React" },
+  { url: "https://21st.dev/", label: "21st.dev", sub: "Componentes UI modernos para copiar" }],
   icon:
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#09562c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+            <circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
           </svg>,
 
-  prompts: [
-  { id: "e1", label: "Skill Creator", title: "Crear skill de mensajes en frío", text: "Eres un experto en diseño de skills para Claude Projects.\n\nTu tarea es crear una skill completa y funcional en formato SKILL.md que haga lo siguiente:\n\n«««\nSKILL: Escritura de mensajes en frío bajo la metodología [___________]\n\nCAPACIDADES QUE DEBE TENER LA SKILL:\n1. Escribir un mensaje en frío siguiendo estrictamente la metodología [___________]\n2. Redactar en tono 100% humano — sin frases genéricas de IA, sin estructuras robóticas, \n   sin palabras como \"espero que este correo te encuentre bien\"\n3. Antes de hacer cualquier acción con Gmail, mostrar el correo al usuario \n   y esperar su aprobación explícita\n4. Solo después de recibir aprobación, conectarse con Gmail MCP \n   y guardar el correo como borrador\n«««\n\nGenera el SKILL.md completo con estas secciones, en este orden exacto:\n\n---\n# [NOMBRE DE LA SKILL]\n\n## Descripción\n[Cuándo debe activarse esta skill — frases clave del usuario que la disparan]\n\n## Rol\n[Qué persona/experto adopta Claude al usar esta skill]\n\n## Metodología\n[Explicación clara de la metodología [___________] con sus principios clave]\n\n## Instrucciones de escritura humana\n[Reglas específicas para que el correo suene humano: longitud, tono, lo que NUNCA debe hacer]\n\n## Flujo de ejecución\n[Paso 1 → Paso 2 → Paso 3 → Paso 4 con descripción de cada acción]\n\n## Flujo de aprobación\n[Cómo Claude presenta el correo, qué pregunta exactamente, qué hace si el usuario dice sí o no]\n\n## Integración Gmail MCP\n[Instrucciones exactas para guardar en borradores — solo después de aprobación]\n\n## Restricciones\n[Lo que Claude NUNCA debe hacer dentro de esta skill]\n\n## Ejemplo de activación\n[Un ejemplo completo: input del usuario → correo generado → pregunta de aprobación → borrador guardado]\n---\n\nEscribe el SKILL.md completo, listo para copiar y pegar en un Claude Project." },
-  { id: "e2", label: "Correo en frío", title: "Correo a Cenit — Modernización de Estaciones de Bombeo", text: "Ayúdame a enviar un correo electrónico a claude.comercial@gmail.com.\n\nContexto:\n- Destinatario: Gerente de renovación de infraestructura de Cenit\n- Proyecto que está desarrollando: Modernización y Mantenimiento de Estaciones de Bombeo\n- Lo que quiero ofrecerle: [DESCRIBE AQUÍ TU PROPUESTA, PRODUCTOS O SERVICIOS]" }
-  ]
+  prompts: []
+
+},
+{
+  id: "recursos",
+  num: "04",
+  title: "Skills",
+  links: [
+  { url: "https://github.com/pbakaus/impeccable", label: "Impeccable", sub: "Skill de diseño UI · GitHub" },
+  { url: "https://github.com/obra/Superpowers", label: "Superpowers", sub: "Framework de skills · GitHub" }],
+  icon:
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#09562c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+          </svg>,
+
+  prompts: []
 
 }];
 
 
 function loadData() {
   try {
-    const stored = localStorage.getItem("colmenia_prompts_v11");
+    const stored = localStorage.getItem("colmenia_prompts_v19");
     if (stored) return JSON.parse(stored);
   } catch (e) {}
   return SECTIONS_DEFAULT;
@@ -686,14 +702,15 @@ function loadData() {
 function saveData(sections) {
   // strip React elements before saving
   const clean = sections.map((s) => ({ ...s, icon: null, prompts: s.prompts }));
-  localStorage.setItem("colmenia_prompts_v11", JSON.stringify(clean));
+  localStorage.setItem("colmenia_prompts_v19", JSON.stringify(clean));
 }
 
 // Re-attach icons after loading from storage
 const ICONS = {
-  prompting: SECTIONS_DEFAULT[0].icon,
-  calendar: SECTIONS_DEFAULT[1].icon,
-  email: SECTIONS_DEFAULT[2].icon
+  presentaciones: SECTIONS_DEFAULT[0].icon,
+  brochure: SECTIONS_DEFAULT[1].icon,
+  web: SECTIONS_DEFAULT[2].icon,
+  recursos: SECTIONS_DEFAULT[3].icon
 };
 
 function withIcons(sections) {
@@ -907,7 +924,11 @@ function App() {
                     </div>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                    <span className="section-count">{section.prompts.length} prompt{section.prompts.length !== 1 ? "s" : ""}</span>
+                    <span className="section-count">{
+              section.prompts.length > 0 ?
+              `${section.prompts.length} prompt${section.prompts.length !== 1 ? "s" : ""}` :
+              (() => { const n = (section.links ? section.links.length : 0) + (section.downloads ? section.downloads.length : 0); return `${n} recurso${n !== 1 ? "s" : ""}`; })()
+            }</span>
                     {isInstructor &&
               <button className="add-prompt-btn" onClick={() => setModal({ sectionId: section.id })}>
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
@@ -916,6 +937,37 @@ function App() {
               }
                   </div>
                 </div>
+
+                {section.links && section.links.map((ln, i) => {
+            const isGh = ln.url.includes("github.com");
+            return (
+                  <a key={`ln-${i}`} href={ln.url} target="_blank" rel="noopener noreferrer" className="download-card" style={{ textDecoration: "none" }}>
+                    <div className="download-card-info">
+                      <div className="download-icon-box">
+                        {isGh ?
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                        </svg> :
+
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                  }
+                      </div>
+                      <div className="download-card-text">
+                        <span className="download-card-sub">{ln.sub || "Recurso externo"}</span>
+                        <span className="download-card-title">{ln.label}</span>
+                      </div>
+                    </div>
+                    <button className="download-btn" type="button" onClick={e => e.stopPropagation()}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                      </svg>
+                      {ln.cta || (isGh ? "Abrir en GitHub" : "Visitar sitio")}
+                    </button>
+                  </a>
+            );
+          })}
 
                 {section.downloads && section.downloads.map((dl, i) => (
                   <a key={i} href={dl.url} download={dl.filename} className="download-card" style={{ textDecoration: "none" }}>
@@ -939,14 +991,9 @@ function App() {
                   </a>
                 ))}
 
-                <div className="prompt-grid">
-                  {section.prompts.length === 0 ?
-            <div className="empty-state">
-                      <strong>Sin prompts aún</strong>
-                      {isInstructor ? "Haz clic en «Agregar Prompt» para comenzar." : "El instructor aún no ha agregado prompts en esta sección."}
-                    </div> :
-
-            section.prompts.map((prompt) =>
+                {section.prompts.length > 0 ?
+            <div className="prompt-grid">
+                  {section.prompts.map((prompt) =>
             <PromptCard
               key={prompt.id}
               prompt={prompt}
@@ -958,7 +1005,16 @@ function App() {
 
             )
             }
-                </div>
+                </div> :
+            (!section.links && !section.downloads) ?
+            <div className="prompt-grid">
+                  <div className="empty-state">
+                    <strong>Sin contenido aún</strong>
+                    {isInstructor ? "Haz clic en «Agregar Prompt» para comenzar." : "El instructor aún no ha agregado contenido en esta sección."}
+                  </div>
+                </div> :
+            null
+            }
               </div>
         )}
           </main>
