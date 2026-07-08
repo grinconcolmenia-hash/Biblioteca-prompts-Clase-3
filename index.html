@@ -629,71 +629,26 @@ const { useState, useEffect, useRef } = React;
 
 const SECTIONS_DEFAULT = [
 {
-  id: "presentaciones",
+  id: "skills",
   num: "01",
-  title: "Creación de Presentaciones",
-  links: [
-  { url: "https://c-lase-2-comatel.vercel.app/#1", label: "Clase 2 — Comatel", sub: "Presentación de la clase", cta: "Abrir presentación" }],
-  downloads: [
-  { url: "assets/Comparativo_Vidrios_Bogota.xlsx", filename: "Comparativo_Vidrios_Bogota.xlsx", label: "Descargar Excel — Comparativo Vidrios Bogotá" }],
-  icon:
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#09562c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
-          </svg>,
-
-  prompts: [
-  { id: "r1", label: "Inteligencia comercial", title: "Comparativo de proveedores en Excel (ReAct)", text: "Actúa como analista de inteligencia comercial. Tu tarea es identificar 3 proveedores REALES de ------- en Bogotá y construir un comparativo en Excel.\n\nTrabaja con el ciclo ReAct para CADA dato, sin excepción:\n- Pensamiento: qué dato necesito y dónde buscarlo.\n- Acción: busca en la web la fuente (sitio oficial, ficha de Google, Páginas Amarillas, registros de cámara de comercio, reseñas).\n- Observación: registra el dato y la URL exacta de donde lo sacaste.\n\nREGLA INNEGOCIABLE: si un dato no aparece en una fuente verificable, escribe \"No disponible\" y NUNCA lo inventes. Esto aplica especialmente a precios e índices económicos.\n\nPara cada uno de los 3 proveedores, completa estas columnas:\nEmpresa | Sitio web | Rango de precio o referencia comercial | Reconocimiento de marca (años en mercado, certificaciones) | Resumen de comentarios en internet | Calificación y nº de reseñas en ficha de Google | Indicadores económicos públicos (ingresos, tamaño, si están disponibles) | Clientes o proyectos referenciados | Fuente (URL)\n\nEntrega el resultado en una tabla y luego genera el archivo Excel." }]
-
-},
-{
-  id: "brochure",
-  num: "02",
-  title: "Brochure",
-  icon:
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#09562c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><rect x="4" y="3" width="16" height="18" rx="1" /><line x1="9" y1="7" x2="15" y2="7" /><line x1="9" y1="11" x2="15" y2="11" />
-          </svg>,
-
-  prompts: [
-  { id: "b1", label: "Diseñador de brochures", title: "Brochure one-pager A4 con manual de marca", text: "Eres un agente diseñador de brochures. Tu trabajo: crear un BROCHURE ONE-PAGER\nvisual, con poco texto y enfocado en vender, usando el manual de marca del usuario.\n\nTÚ DEFINES la estructura (abajo). NO inventes el contenido: PREGÚNTASELO al usuario.\n\n== PASO 1: PREGUNTA AL USUARIO (en una sola tanda, breve) ==\n1. ¿Qué producto o servicio quieres promocionar y a quién va dirigido?\n2. ¿Cuál es la promesa principal en una frase?\n3. Dame 3 beneficios clave (cortos; con un número/dato si lo tienes).\n4. ¿Cuál es el llamado a la acción (CTA) y tus datos de contacto?\n5. Pásame tu manual de marca / identidad (carpeta con colores, fuentes y logos),\n   o dime dónde está. Si no lo tienes, lo busco en la carpeta de trabajo.\nEspera sus respuestas antes de continuar.\n\n== PASO 2: LEE LA MARCA ==\nExtrae del manual la paleta (hex), las fuentes (archivos reales) y los logos.\nUsa SIEMPRE esos colores, fuentes y logos. No inventes ninguno.\n\n== PASO 3: ENTREGA EL PROMPT DE IMAGEN Y PIDE LA IMAGEN ==\nEl usuario NO tiene generador propio. Redáctale un PROMPT DE IMAGEN detallado,\nen inglés, listo para pegar en cualquier modelo (Midjourney, DALL·E, Firefly,\nLeonardo, Ideogram...). Debe incluir:\n - Concepto visual concreto y vendedor del servicio.\n - Los hex EXACTOS de la marca y fondo/estética coherentes (premium, 3D/cinemático).\n - MUCHO espacio negativo a un lado para superponer texto.\n - Estilo, iluminación, composición y aspecto sugerido (ej. 4:3).\n - Cierre obligatorio: \"No text, no words, no letters, no logos\".\n - 1-2 conceptos alternativos.\nLuego DETENTE y pídele que te pegue/adjunte la imagen ya generada (o su ruta).\nMientras no haya imagen, usa un placeholder oscuro de marca para que el brochure\nse vea completo y la imagen sea reemplazable en 1 paso.\n\n== ESTRUCTURA FIJA DEL BROCHURE (la defines tú) ==\n- Formato: A4 vertical, UNA sola página (width:210mm; height:297mm; overflow:hidden;\n  @page{size:A4;margin:0}).\n- HERO (~50% superior): imagen a sangre + degradado oscuro encima para legibilidad,\n  logo arriba, titular GIGANTE (1 idea), 1 línea de apoyo. Poco texto.\n- BENEFICIOS (banda central): exactamente 3 columnas, cada una con icono,\n  número/palabra grande y 2-4 palabras + microcopy de 1 línea.\n- CTA (banda inferior, color de acento de marca): frase de acción grande + contacto.\n- Fuentes de marca vía @font-face desde los archivos reales. Usa flex:none en\n  secciones que no deban encogerse (evita que overflow:hidden recorte contenido).\n\n== PORTABILIDAD (clave) ==\nEl HTML final debe ser AUTÓNOMO: incrusta imagen, logos y fuentes como data URI\nbase64 dentro del HTML (NO rutas relativas; OneDrive \"solo en la nube\" o mover el\narchivo rompe las imágenes). Cuidado con rutas que tengan paréntesis en el nombre.\n\n== VERIFICACIÓN (no afirmes sin comprobar) ==\nRenderiza con Chrome headless (file:/// con RUTA ABSOLUTA; escribe a %TEMP% y copia,\nporque Chrome no escribe en OneDrive). Revisa el screenshot tú mismo: imagen visible,\ntexto legible y TODO en 1 página; corrige espaciados si se desborda. Exporta PDF\n(--print-to-pdf --no-margins --print-to-pdf-no-header) y verifica 1 página (/Count 1).\n\n== ENTREGABLES ==\nPNG plano alta resolución + PDF A4 de 1 página + HTML PORTABLE autónomo.\nMuestra el preview antes de cerrar y ofrece variantes (otro concepto de imagen,\nfondo claro, post cuadrado para redes, QR a WhatsApp/agenda)." }]
-
-},
-{
-  id: "web",
-  num: "03",
-  title: "WEB",
-  links: [
-  { url: "https://www.lapa.ninja/", label: "Lapa Ninja", sub: "Inspiración de landing pages" },
-  { url: "https://reactbits.dev/", label: "React Bits", sub: "Componentes y animaciones para React" },
-  { url: "https://21st.dev/", label: "21st.dev", sub: "Componentes UI modernos para copiar" }],
-  icon:
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#09562c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-          </svg>,
-
-  prompts: []
-
-},
-{
-  id: "recursos",
-  num: "04",
   title: "Skills",
-  links: [
-  { url: "https://github.com/pbakaus/impeccable", label: "Impeccable", sub: "Skill de diseño UI · GitHub" },
-  { url: "https://github.com/obra/Superpowers", label: "Superpowers", sub: "Framework de skills · GitHub" }],
+  downloads: [
+  { url: "assets/Catalogo_COMATEL.xlsx", filename: "Catalogo_COMATEL.xlsx", label: "Descargar Excel — Catálogo COMATEL" }],
   icon:
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#09562c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
           </svg>,
 
-  prompts: []
+  prompts: [
+  { id: "s1", label: "Skill · Contenido", title: "Generar la skill `cotizar`", text: "ROL\nEres un creador de skills. Vas a generar la skill `cotizar`, que arma cotizaciones para el agente.\n\nQUÉ HACE ESTA SKILL (cuéntalo con tus palabras — texto abierto)\nDescribe libremente para qué es y cómo se usa. De aquí sale el criterio de la skill.\n[_______]\n\nSE ACTIVA CUANDO\n[ ej. el usuario pide una cotización, un precio o arma un pedido: _______ ]\n\nLA BASE DE DATOS\nLa skill busca los productos en el Excel del equipo y extrae los campos de @[_______]\n(deja el @ apuntando al archivo/columnas; lo definimos en clase.)\nCon esos campos hace lo básico: encuentra el producto, saca su precio y su IVA, y calcula por cantidad.\n\nLO QUE DEBE MANEJAR BIEN (los 2 puntos que importan)\n1. Paquetes / combos: si un producto es un combo, ¿cómo lo desglosa por ítem en la cotización? [_______]\n2. Formato de salida estructurado: la cotización debe salir en un formato ordenado y predecible, porque el siguiente agente/skill la va a consumir (no es solo para leer). Define esa estructura. [ ej. cliente → ítems (código, producto, cantidad, unitario, IVA, subtotal) → total → condiciones: _______ ]\n\nA TU CRITERIO (opcional)\nUna mejora que quieras darle: [_______]\n\nCIERRE\n- Escribe la skill con su estructura (nombre, cuándo se activa, instrucciones, y el script para leer el Excel).\n- Si algo no te lo especifiqué, pregúntamelo antes de escribir. No inventes precios ni datos: todo sale del Excel." },
+  { id: "s2", label: "Skill · Documento", title: "Generar la skill `crear-cotizacion`", text: "ROL\nEres un creador de skills. Vas a generar la skill `crear-cotizacion`, que toma el contenido que arma la skill `cotizar` y lo convierte en el documento final de cotización, con la imagen de la marca.\n\nQUÉ HACE ESTA SKILL (cuéntalo con tus palabras — texto abierto)\nDescribe libremente para qué es y cómo debe verse el resultado.\n[_______]\n\nSE ACTIVA CUANDO\n[ ej. ya existe el contenido de la cotización y hay que entregar el documento: _______ ]\n\nRESPETA EL DESIGN SYSTEM\nLa skill debe leer el manual de marca en @[RUTA DESIGN SYSTEM: _______] y aplicar: colores, tipografía y logo de la empresa. No invente identidad visual — todo sale del manual.\n\nCONSTRÚYELA EN PYTHON\nEl documento se genera con un script en Python. La skill debe traer el esquema que:\n1. Recibe el contenido estructurado (el que entrega la skill `cotizar`).\n2. Arma el documento de la cotización aplicando el manual de marca.\n3. Lo guarda como archivo en la carpeta de outputs.\n\nORGANIZA TODO EN CARPETAS\n- Deja las cotizaciones en [CARPETA DE OUTPUTS: ej. /cotizaciones/ : _______ ].\n- Cómo organiza dentro: [ ej. por cliente / por fecha / por número de cotización: _______ ]\n- Cómo nombra cada archivo: [ ej. COT-2026-0001_Cliente.pdf : _______ ]\n\nA TU CRITERIO (opcional)\nUna mejora que quieras darle: [_______]\n\nCIERRE\n- Escribe la skill con su estructura (nombre, cuándo se activa, instrucciones, y el script Python que genera y guarda el documento).\n- Si algo no te lo especifiqué (formato del archivo, cómo organizar las carpetas), pregúntamelo antes de escribir." }]
 
 }];
 
 
 function loadData() {
   try {
-    const stored = localStorage.getItem("colmenia_prompts_v19");
+    const stored = localStorage.getItem("colmenia_prompts_v22");
     if (stored) return JSON.parse(stored);
   } catch (e) {}
   return SECTIONS_DEFAULT;
@@ -702,15 +657,12 @@ function loadData() {
 function saveData(sections) {
   // strip React elements before saving
   const clean = sections.map((s) => ({ ...s, icon: null, prompts: s.prompts }));
-  localStorage.setItem("colmenia_prompts_v19", JSON.stringify(clean));
+  localStorage.setItem("colmenia_prompts_v22", JSON.stringify(clean));
 }
 
 // Re-attach icons after loading from storage
 const ICONS = {
-  presentaciones: SECTIONS_DEFAULT[0].icon,
-  brochure: SECTIONS_DEFAULT[1].icon,
-  web: SECTIONS_DEFAULT[2].icon,
-  recursos: SECTIONS_DEFAULT[3].icon
+  skills: SECTIONS_DEFAULT[0].icon
 };
 
 function withIcons(sections) {
@@ -897,9 +849,9 @@ function App() {
 
           {/* HERO */}
           <section className="hero">
-            <div className="hero-eyebrow">Biblioteca de Prompts</div>
-            <h1>Ejercicios<br /><span>Prácticos</span></h1>
-            <p>Selecciona, personaliza y copia los prompts diseñados para cada ejercicio de la clase. Reemplaza los textos entre <strong style={{ color: "#09562c", fontWeight: 600 }}>[corchetes]</strong> con tu información real.</p>
+            <div className="hero-eyebrow">Clase COMATEL · Construcción de Agentes Eficientes</div>
+            <h1>Biblioteca de Prompts<br /><span>Agentes</span></h1>
+            <p>Plantillas listas para construir las <strong style={{ color: "#09562c", fontWeight: 600 }}>skills</strong> de tu agente cotizador. Copia el prompt, llena lo que está entre <strong style={{ color: "#09562c", fontWeight: 600 }}>[corchetes]</strong> con tus palabras, y pégalo en Claude.</p>
           </section>
 
           {/* INSTRUCTOR BANNER */}
