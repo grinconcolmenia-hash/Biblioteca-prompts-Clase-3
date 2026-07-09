@@ -634,6 +634,8 @@ const SECTIONS_DEFAULT = [
   title: "Skills",
   downloads: [
   { url: "assets/Catalogo_COMATEL.xlsx", filename: "Catalogo_COMATEL.xlsx", label: "Descargar Excel — Catálogo COMATEL" }],
+  links: [
+  { url: "https://airtable.com/", label: "Airtable", sub: "Crea tu base y tu token de API", cta: "Visitar sitio" }],
   icon:
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#09562c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
@@ -643,12 +645,38 @@ const SECTIONS_DEFAULT = [
   { id: "s1", label: "Skill · Contenido", title: "Generar la skill `cotizar`", text: "ROL\nEres un creador de skills. Vas a generar la skill `cotizar`, que arma cotizaciones para el agente.\n\nQUÉ HACE ESTA SKILL (cuéntalo con tus palabras — texto abierto)\nDescribe libremente para qué es y cómo se usa. De aquí sale el criterio de la skill.\n[_______]\n\nSE ACTIVA CUANDO\n[ ej. el usuario pide una cotización, un precio o arma un pedido: _______ ]\n\nLA BASE DE DATOS\nLa skill busca los productos en el Excel del equipo y extrae los campos de @[_______]\n(deja el @ apuntando al archivo/columnas; lo definimos en clase.)\nCon esos campos hace lo básico: encuentra el producto, saca su precio y su IVA, y calcula por cantidad.\n\nLO QUE DEBE MANEJAR BIEN (los 2 puntos que importan)\n1. Paquetes / combos: si un producto es un combo, ¿cómo lo desglosa por ítem en la cotización? [_______]\n2. Formato de salida estructurado: la cotización debe salir en un formato ordenado y predecible, porque el siguiente agente/skill la va a consumir (no es solo para leer). Define esa estructura. [ ej. cliente → ítems (código, producto, cantidad, unitario, IVA, subtotal) → total → condiciones: _______ ]\n\nA TU CRITERIO (opcional)\nUna mejora que quieras darle: [_______]\n\nCIERRE\n- Escribe la skill con su estructura (nombre, cuándo se activa, instrucciones, y el script para leer el Excel).\n- Si algo no te lo especifiqué, pregúntamelo antes de escribir. No inventes precios ni datos: todo sale del Excel." },
   { id: "s2", label: "Skill · Documento", title: "Generar la skill `crear-cotizacion`", text: "ROL\nEres un creador de skills. Vas a generar la skill `crear-cotizacion`, que toma el contenido que arma la skill `cotizar` y lo convierte en el documento final de cotización, con la imagen de la marca.\n\nQUÉ HACE ESTA SKILL (cuéntalo con tus palabras — texto abierto)\nDescribe libremente para qué es y cómo debe verse el resultado.\n[_______]\n\nSE ACTIVA CUANDO\n[ ej. ya existe el contenido de la cotización y hay que entregar el documento: _______ ]\n\nRESPETA EL DESIGN SYSTEM\nLa skill debe leer el manual de marca en @[RUTA DESIGN SYSTEM: _______] y aplicar: colores, tipografía y logo de la empresa. No invente identidad visual — todo sale del manual.\n\nCONSTRÚYELA EN PYTHON\nEl documento se genera con un script en Python. La skill debe traer el esquema que:\n1. Recibe el contenido estructurado (el que entrega la skill `cotizar`).\n2. Arma el documento de la cotización aplicando el manual de marca.\n3. Lo guarda como archivo en la carpeta de outputs.\n\nORGANIZA TODO EN CARPETAS\n- Deja las cotizaciones en [CARPETA DE OUTPUTS: ej. /cotizaciones/ : _______ ].\n- Cómo organiza dentro: [ ej. por cliente / por fecha / por número de cotización: _______ ]\n- Cómo nombra cada archivo: [ ej. COT-2026-0001_Cliente.pdf : _______ ]\n\nA TU CRITERIO (opcional)\nUna mejora que quieras darle: [_______]\n\nCIERRE\n- Escribe la skill con su estructura (nombre, cuándo se activa, instrucciones, y el script Python que genera y guarda el documento).\n- Si algo no te lo especifiqué (formato del archivo, cómo organizar las carpetas), pregúntamelo antes de escribir." }]
 
+},
+{
+  id: "mcp",
+  num: "02",
+  title: "MCP",
+  icon:
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#09562c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 17H7A5 5 0 0 1 7 7h2" /><path d="M15 7h2a5 5 0 1 1 0 10h-2" /><line x1="8" y1="12" x2="16" y2="12" />
+          </svg>,
+
+  prompts: [
+  { id: "m1", label: "Conexión · MCP", title: "Generar el .mcp.json (Airtable)", text: "Hazme un .mcp.json para conectar Airtable por MCP. Estoy en Windows, deja dónde pego mi token y dime cómo activarlo." }]
+
+},
+{
+  id: "claudemd",
+  num: "03",
+  title: "CLAUDE.md — El Orquestador",
+  icon:
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#09562c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+          </svg>,
+
+  prompts: [
+  { id: "c1", label: "Orquestador", title: "Generar el CLAUDE.md del agente (skills + MCP)", text: "ROL\nEres un arquitecto de agentes. Vas a generar el CLAUDE.md del agente de [EMPRESA: _______]. Las skills y los conectores ya existen: no los reescribas, solo indica cuándo usarlos.\n\n1. QUÉ HACE EL AGENTE (texto abierto)\nDescríbelo con tus palabras: a quién atiende y qué logra al final.\n[_______]\n\n2. CON QUIÉN HABLA\nInterlocutor: [ cliente final / vendedor interno: _______ ]\nTono: [ ej. profesional, cercano, español colombiano: _______ ]\n\n3. DISCOVERY — pregunta antes de actuar\nAntes de generar nada, el agente hace preguntas para entender la necesidad.\n- ¿Qué debe preguntar? [_______]\n- ¿Cuándo ya tiene suficiente para avanzar? [_______]\n\n4. LAS SKILLS QUE ORQUESTA (no las regeneres)\n| Skill | Cuándo la usa |\n| [_______] | [_______] |\n| [_______] | [_______] |\n| [_______] | [_______] |\n\n5. LOS CONECTORES MCP (aquí viven los datos)\nUn conector MCP es la puerta del agente hacia datos que están fuera de él. El agente lee de ahí, nunca de memoria, y nunca inventa un dato.\n| Conector MCP | Qué datos trae | Cuándo lo usa |\n| [_______] | [_______] | [_______] |\n| [_______] | [_______] | [_______] |\n| [_______] | [_______] | [_______] |\nRegla de oro con los conectores: [ ej. si el dato no está en el conector, dilo — no lo inventes: _______ ]\n\n6. EL FLUJO (el orden en que hace las cosas)\n- [_______]\n- Punto de aprobación: le pregunta al cliente si tiene cambios. [ ajusta / avanza: _______ ]\n- [_______]\n\n7. QUÉ NUNCA HACE\n[ ej. no promete entregas, no inventa precios, no negocia fuera de su autoridad: _______ ]\n\n8. A TU CRITERIO (opcional)\nUna regla que quieras agregar: [_______]\n\nCIERRE\n- Escribe el CLAUDE.md en [RUTA DE SALIDA: _______].\n- No copies adentro lo que ya hacen las skills ni los datos de los conectores. Solo di cuándo usarlos.\n- Si algo no te lo especifiqué, pregúntamelo antes de escribir. No inventes reglas de negocio.\n- Al terminar, resúmeme qué quedó como regla, qué delegaste a las skills y qué a los conectores." }]
+
 }];
 
 
 function loadData() {
   try {
-    const stored = localStorage.getItem("colmenia_prompts_v22");
+    const stored = localStorage.getItem("colmenia_prompts_v25");
     if (stored) return JSON.parse(stored);
   } catch (e) {}
   return SECTIONS_DEFAULT;
@@ -657,12 +685,14 @@ function loadData() {
 function saveData(sections) {
   // strip React elements before saving
   const clean = sections.map((s) => ({ ...s, icon: null, prompts: s.prompts }));
-  localStorage.setItem("colmenia_prompts_v22", JSON.stringify(clean));
+  localStorage.setItem("colmenia_prompts_v25", JSON.stringify(clean));
 }
 
 // Re-attach icons after loading from storage
 const ICONS = {
-  skills: SECTIONS_DEFAULT[0].icon
+  skills: SECTIONS_DEFAULT[0].icon,
+  mcp: SECTIONS_DEFAULT[1].icon,
+  claudemd: SECTIONS_DEFAULT[2].icon
 };
 
 function withIcons(sections) {
